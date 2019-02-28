@@ -17,5 +17,5 @@ use yii\bootstrap\ActiveForm;
 		<li><label>Повторяющееся</label><?= Html::encode($activity ->is_repeated?'Да': 'Нет')?></li>
 	</ul>
 
-	<?= Html::a('Создать новое событие', ['/activity/create'], ['class'=>'btb btn-default']);
+	<?= Html::a('Создать новое событие', ['/activity/create'], ['class'=>'btb btn-default']);?>
 </div>

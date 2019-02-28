@@ -37,7 +37,9 @@ class ActivityCreateAction extends Action
 			if($comp->createActivity($activity)){
 				
 				return $this->controller->render('create-derivation', ['activity' => $activity]);
-			}
+			}else{
+//			    print_r($activity->getErrors());
+            }
 			
 		}else{
 			//с пустыми значениями

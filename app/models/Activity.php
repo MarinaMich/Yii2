@@ -84,9 +84,9 @@ class Activity extends Model
 	/**
 	* картинка
 	*
-	* @var file
+	* @var UploadedFile[]
 	*/
-	public $image;
+	public $images;
 
 	
 
@@ -116,14 +116,14 @@ class Activity extends Model
 			['title', 'string', 'max' => 150, 'min' =>2],
 			['startDay', 'date', 'format' => 'y-m-d'],
 			['endDay', 'date', 'format' => 'y-m-d'],
-			[['title', 'startDay', 'endDay', 'idAuthor', 'body'], 'required'],
+			[['title', 'startDay', 'endDay', 'body'], 'required'],
 			[['is_blocked', 'use_notification', 'is_repeated'], 'boolean'],
 			['email', 'email'],
 			['email', 'required', 'when' => function($model){
 				return $model->use_notification ?true:false;
 			}],
 			['email_repeat', 'compare', 'compareAttribute'=>'email'],
-			[['image'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles'=>3]
+			[['images'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles'=>3]
 
 		];
 	}
