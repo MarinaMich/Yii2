@@ -9,70 +9,10 @@ use yii\validators\DateValidator;
 use yii\validators\Validator;
 
 
-class Activity extends Model
+class Activity extends ActivityBase
 {
-	/**
-	* Название события
-	*
-	* @var string 
-	*/
-	public $title;
-	
-	/**
-	* День начала события. Хранится в Unix timestamp
-	*
-	* @var int 
-	*/
-	public $startDay;
-	
-	/**
-	* День завершения события. Хранится в Unix timestamp
-	*
-	* @var int 
-	*/
-	public $endDay;
-	
-	/**
-	* ID автора, создавшего события
-	*
-	* @var int 
-	*/
-    public $idAuthor;
-    
-	/**
-	* Описание события
-	*
-	* @var string 
-	*/
-	public $body;
 
-	/**
-	* Чекбокс
-	*
-	* @var boolean 
-	*/
-	public $is_blocked;
-
-	/**
-	* Чекбокс повтор события
-	*
-	* @var boolean 
-	*/
-	public $is_repeated;
-
-	/**
-	* Чекбокс согласия на оповещение
-	*
-	* @var boolean 
-	*/
-	public $use_notification;
-
-	/**
-	* email
-	*
-	* @var email 
-	*/
-	public $email;
+    public $email;
 
 	/**
 	* проверка email
@@ -111,7 +51,7 @@ class Activity extends Model
 
 	function rules()
 	{
-		return [
+		return array_merge([
 			['title', 'string', 'max' => 150, 'min' =>2],
 			['startDay', 'date', 'format' => 'php:Y-m-d'],
 			['endDay', 'date', 'format' => 'php:Y-m-d'],
@@ -124,7 +64,7 @@ class Activity extends Model
 			['email_repeat', 'compare', 'compareAttribute'=>'email'],
 			[['images'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles'=>3]
 
-		];
+		],parent::rules());
 	}
 
 	public function attributeLabels()

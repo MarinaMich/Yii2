@@ -15,12 +15,16 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'rbac'=>\app\components\RbacComponent::class,
         'activity'=>['class'=>\app\components\ActivityComponent::class,
             'activity_class' => \app\models\Activity::class],
         'auth'=>\app\components\UsersAuthComponent::class,
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '6m09LFtDrvgV5_-z0t39JPy_QllxHv5A',
+        ],
+        'authManager'=>[
+            'class'=>'\yii\rbac\DbManager'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

@@ -33,6 +33,14 @@ class ActivityComponent extends Component
 		return $model;
 	}
 
+    /**
+     * @param $id
+     * @return Activity|array|\yii\db\ActiveRecord|null
+     */
+	public function getActivity($id){
+	    return $this->getModel()::find()->andWhere(['id'=>$id])->one();
+    }
+
 	public function createActivity(&$model):bool{
 
         $model->images = UploadedFile::getInstances($model, 'images');

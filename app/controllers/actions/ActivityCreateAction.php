@@ -6,6 +6,7 @@ namespace app\controllers\actions;
 use app\models\Activity;
 use yii\base\Action;
 use app\components\ActivityComponent;
+use yii\web\HttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
 
@@ -14,6 +15,10 @@ class ActivityCreateAction extends Action
 {
     public function run()
     {
+
+        if(!\Yii::$app->rbac->canCreateActivity()){
+            throw new HttpException(403,'Нет доступа к созданию');
+        }
 
         /**@var ActivityComponent $comp */
         //1 вариант

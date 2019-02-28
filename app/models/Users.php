@@ -25,6 +25,7 @@ class Users extends UsersBase implements IdentityInterface
 
     public function rules()
     {
+//        $this->updateAttributes(['email']);
         return array_merge([
             ['password','string','min'=>4],
 //            ['email','exist']
