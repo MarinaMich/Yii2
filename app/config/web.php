@@ -9,6 +9,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -16,6 +17,7 @@ $config = [
     'components' => [
         'activity'=>['class'=>\app\components\ActivityComponent::class,
             'activity_class' => \app\models\Activity::class],
+        'auth'=>\app\components\UsersAuthComponent::class,
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '6m09LFtDrvgV5_-z0t39JPy_QllxHv5A',
