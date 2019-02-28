@@ -15,6 +15,7 @@ class ActivityComponent extends Component
 	public function init()
 	{
 		parent::init();
+
 		if(empty($this->activity_class)){
 			throw new \Exception("Need attribute activity_class");
 			
@@ -33,23 +34,31 @@ class ActivityComponent extends Component
 	}
 
 	public function createActivity(&$model):bool{
-		if ($model->validate()) {
-            $model->images = UploadedFile::getInstances($model, 'images');
-            $path = $this->getPathSaveFile();
-            if($model->images) {
-                foreach ($model->images as $image) {
-                    $name = mt_rand(0, 9999) . time() . '.' . $image->getExtension();
-                    if (!$image->saveAs($path . $name)) {
-                        $model->addError('images', 'Файл не удалось переместить');
-                        return false;
-                    }
-                    $model->imagesNewNames[] = $name;
-                }
-            }
+
+        $model->images = UploadedFile::getInstances($model, 'images');
+		if ($model->validate() && $this->saveImages($model)) {
+
             return true;
         }else{
 		    return false;
         }
+    }
+
+    private function saveImages(&$model){
+        $path = $this->getPathSaveFile();
+        if($model->images) {
+            foreach ($model->images as $image) {
+                $name = mt_rand(0, 9999) . time() . '.' . $image->getExtension();
+                if (!$image->saveAs($path . $name)) {
+                    $model->addError('images', 'Файл не удалось переместить');
+                    return false;
+                }
+                $model->imagesNewNames[] = $name;
+            }
+        }else{
+            return true;
+        }
+
     }
 
     private function getPathSaveFile()

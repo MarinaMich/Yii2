@@ -90,17 +90,17 @@ class Activity extends Model
 
 	
 
-	/*public function beforeValidate()
+	public function beforeValidate()
 	{
 		if(!empty($this->startDay)){
-			$this->startDay=\DateTime::createFromFormat('d-m-y', $this->startDay);
+			$this->startDay=\DateTime::createFromFormat('d.m.Y', $this->startDay);
 			if($this->startDay){
 				$this->startDay=$this->startDay->format('Y-m-d');
 			}
 		}
 
 		if(!empty($this->endDay)){
-			$this->endDay=\DateTime::createFromFormat('d-m-y', $this->endDay);
+			$this->endDay=\DateTime::createFromFormat('d.m.Y', $this->endDay);
 			if($this->endDay){
 				$this->endDay=$this->endDay->format('Y-m-d');
 			}
@@ -108,14 +108,13 @@ class Activity extends Model
 		
 		return parent::beforeValidate();
 	}
-*/
 
 	function rules()
 	{
 		return [
 			['title', 'string', 'max' => 150, 'min' =>2],
-			['startDay', 'date', 'format' => 'y-m-d'],
-			['endDay', 'date', 'format' => 'y-m-d'],
+			['startDay', 'date', 'format' => 'php:Y-m-d'],
+			['endDay', 'date', 'format' => 'php:Y-m-d'],
 			[['title', 'startDay', 'endDay', 'body'], 'required'],
 			[['is_blocked', 'use_notification', 'is_repeated'], 'boolean'],
 			['email', 'email'],
