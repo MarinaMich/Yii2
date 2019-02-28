@@ -26,7 +26,7 @@ use yii\helpers\Html;
 		<?=$form->field($activity, 'email_repeat');?>
 		<?=$form->field($activity, 'is_blocked') ->checkbox();?>
 		<?=$form->field($activity, 'is_repeated') ->checkbox();?>
-		<?=$form->field($activity, 'image') ->fileInput();?>
+		<?=$form->field($activity, 'images') ->fileInput();?>
 
 
 		<div class="form-group">

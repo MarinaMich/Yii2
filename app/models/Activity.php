@@ -9,70 +9,10 @@ use yii\validators\DateValidator;
 use yii\validators\Validator;
 
 
-class Activity extends Model
+class Activity extends ActivityBase
 {
-	/**
-	* Название события
-	*
-	* @var string 
-	*/
-	public $title;
-	
-	/**
-	* День начала события. Хранится в Unix timestamp
-	*
-	* @var int 
-	*/
-	public $startDay;
-	
-	/**
-	* День завершения события. Хранится в Unix timestamp
-	*
-	* @var int 
-	*/
-	public $endDay;
-	
-	/**
-	* ID автора, создавшего события
-	*
-	* @var int 
-	*/
-    public $idAuthor;
-    
-	/**
-	* Описание события
-	*
-	* @var string 
-	*/
-	public $body;
 
-	/**
-	* Чекбокс
-	*
-	* @var boolean 
-	*/
-	public $is_blocked;
-
-	/**
-	* Чекбокс повтор события
-	*
-	* @var boolean 
-	*/
-	public $is_repeated;
-
-	/**
-	* Чекбокс согласия на оповещение
-	*
-	* @var boolean 
-	*/
-	public $use_notification;
-
-	/**
-	* email
-	*
-	* @var email 
-	*/
-	public $email;
+    public $email;
 
 	/**
 	* проверка email
@@ -90,17 +30,17 @@ class Activity extends Model
 
 	
 
-	/*public function beforeValidate()
+	public function beforeValidate()
 	{
 		if(!empty($this->startDay)){
-			$this->startDay=\DateTime::createFromFormat('d-m-y', $this->startDay);
+			$this->startDay=\DateTime::createFromFormat('d.m.Y', $this->startDay);
 			if($this->startDay){
 				$this->startDay=$this->startDay->format('Y-m-d');
 			}
 		}
 
 		if(!empty($this->endDay)){
-			$this->endDay=\DateTime::createFromFormat('d-m-y', $this->endDay);
+			$this->endDay=\DateTime::createFromFormat('d.m.Y', $this->endDay);
 			if($this->endDay){
 				$this->endDay=$this->endDay->format('Y-m-d');
 			}
@@ -108,14 +48,13 @@ class Activity extends Model
 		
 		return parent::beforeValidate();
 	}
-*/
 
 	function rules()
 	{
-		return [
+		return array_merge([
 			['title', 'string', 'max' => 150, 'min' =>2],
-			['startDay', 'date', 'format' => 'y-m-d'],
-			['endDay', 'date', 'format' => 'y-m-d'],
+			['startDay', 'date', 'format' => 'php:Y-m-d'],
+			['endDay', 'date', 'format' => 'php:Y-m-d'],
 			[['title', 'startDay', 'endDay', 'body'], 'required'],
 			[['is_blocked', 'use_notification', 'is_repeated'], 'boolean'],
 			['email', 'email'],
@@ -125,7 +64,7 @@ class Activity extends Model
 			['email_repeat', 'compare', 'compareAttribute'=>'email'],
 			[['images'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles'=>3]
 
-		];
+		],parent::rules());
 	}
 
 	public function attributeLabels()
