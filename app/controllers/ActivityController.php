@@ -33,8 +33,6 @@ class ActivityController extends BaseController
             }
         }
 
-
-
 	    return $this->render('create-derivation',['activity'=>$acitivty]);
     }
 } 

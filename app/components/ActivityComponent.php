@@ -48,6 +48,7 @@ class ActivityComponent extends Component
 
             return true;
         }else{
+		    $model->images='';
 		    return false;
         }
     }

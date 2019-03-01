@@ -15,8 +15,8 @@ use yii\helpers\Html;
 		<h2>Создание нового события</h2>
 		<?php $form=ActiveForm::begin();?>
 		<?=$form->field($activity, 'title');?>
-		<?=$form->field($activity, 'startDay')->textInput(['type' => 'date']); ?>
-		<?=$form->field($activity, 'endDay')->textInput(['type' => 'date']); ?>
+		<?=$form->field($activity, 'startDay'); ?>
+		<?=$form->field($activity, 'endDay'); ?>
 		<?=$form->field($activity, 'body') ->textarea();?>
 		<?=$form->field($activity, 'use_notification') ->checkbox();?>
 		<?=$form->field($activity, 'email', [
