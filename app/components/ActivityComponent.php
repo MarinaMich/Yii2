@@ -4,6 +4,7 @@ namespace app\components;
 use app\models\Activity;
 use yii\base\Component;
 use yii\helpers\FileHelper;
+use yii\log\Logger;
 use yii\web\UploadedFile;
 
 class ActivityComponent extends Component
@@ -42,13 +43,19 @@ class ActivityComponent extends Component
 	    return $this->getModel()::find()->andWhere(['id'=>$id])->one();
     }
 
+    /**
+     * @param $model Activity
+     * @return bool
+     */
 	public function createActivity(&$model):bool{
 
         $model->images = UploadedFile::getInstances($model, 'images');
-		if ($model->validate() && $this->saveImages($model)) {
-
+        $model->user_id=\Yii::$app->user->id;
+		if ($model->validate() && $model->save()) {
+            $this->saveImages($model);
             return true;
         }else{
+		    \Yii::getLogger()->log($model->getErrors(),Logger::LEVEL_ERROR);
             $model->images='';
 		    return false;
         }
@@ -65,6 +72,7 @@ class ActivityComponent extends Component
                 }
                 $model->imagesNewNames[] = $name;
             }
+            return true;
         }else{
             return true;
         }
