@@ -15,8 +15,8 @@ class ActivityCreateAction extends Action
 {
     public function run()
     {
-
-        if(!\Yii::$app->rbac->canCreateActivity()){
+//проверка на допуск
+      if(!\Yii::$app->rbac->canCreateActivity()){
             throw new HttpException(403,'Нет доступа к созданию');
         }
 
@@ -42,10 +42,9 @@ class ActivityCreateAction extends Action
 
             if ($comp->createActivity($activity)) {
 
-//                return $this->controller->redirect(['/activity/view','id'=>$activity->id]);
                 return $this->controller->render('create-derivation', ['activity' => $activity]);
             } else {
-//			    print_r($activity->getErrors());
+//		    print_r($activity->getErrors());
             }
 
         } else {

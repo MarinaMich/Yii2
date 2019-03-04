@@ -9,6 +9,7 @@ class BaseController extends Controller
 {
     public function beforeAction($action)
     {
+        //проверка на авторизацию
         if(\Yii::$app->user->isGuest){
             throw new HttpException(401,'Not access');
         }

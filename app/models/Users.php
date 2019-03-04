@@ -19,13 +19,15 @@ use yii\web\IdentityInterface;
  */
 class Users extends UsersBase implements IdentityInterface
 {
+    //так как не можем в форме регистрации использовать password_hash, вводим $password
     public $password;
 
     public $username;
 
     public function rules()
     {
-//        $this->updateAttributes(['email']);
+   //   $this->updateAttributes(['email']);
+    //array_merge позволяет передать массив новых и родительских свойств    
         return array_merge([
             ['password','string','min'=>4],
 //            ['email','exist']
@@ -39,6 +41,8 @@ class Users extends UsersBase implements IdentityInterface
      * Null should be returned if such an identity cannot be found
      * or the identity is not in an active state (disabled, deleted, etc.)
      */
+
+    //получив id функция наполнить модель данными из БД
     public static function findIdentity($id)
     {
         return Users::find()->andWhere(['id'=>$id])->one();

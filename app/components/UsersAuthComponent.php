@@ -12,6 +12,7 @@ namespace app\components;
 use app\models\Users;
 use yii\base\Component;
 
+//авторизация
 class UsersAuthComponent extends Component
 {
     /**
@@ -31,6 +32,7 @@ class UsersAuthComponent extends Component
      * @param $model Users
      * @return bool
      */
+    //авторизация
     public function loginUser(&$model):bool{
         $user=$this->getUserByEmail($model->email);
         if(!$user){
@@ -42,6 +44,7 @@ class UsersAuthComponent extends Component
             $model->addError('password','Пароль неверный');
             return false;
         }
+        //переопределяем атрибут
         $user->username=$user->email;
 
         return \Yii::$app->user->login($user);
@@ -52,6 +55,7 @@ class UsersAuthComponent extends Component
      * @param $hash
      * @return bool
      */
+    //проверка пароля
     private function validatePassword($password,$hash){
         return \Yii::$app->security->validatePassword($password,$hash);
     }
@@ -60,6 +64,7 @@ class UsersAuthComponent extends Component
      * @param $email
      * @return Users|array|\yii\db\ActiveRecord
      */
+    //проверка email
     public function getUserByEmail($email){
         return $this->getModel()::find()->andWhere(['email'=>$email])->one();
     }
@@ -74,13 +79,13 @@ class UsersAuthComponent extends Component
         if(!$model->validate(['password','email'])){
             return false;
         }
-
+//присваиваем hash паролю, введенному пользователем
         $model->password_hash=$this->hashPassword($model->password);
-
+// проверка на условия rules(), в этом случае не обязательна, так как save() вызовит validate() 
 //        if(!$model->validate()){
 //            return false;
 //        }
-
+//отправка в БД, save() возвращает или true, или false
         if($model->save()){
             return true;
         }
@@ -88,6 +93,7 @@ class UsersAuthComponent extends Component
         return false;
     }
 
+//шифруем пароль
     private function hashPassword($password){
         return \Yii::$app->security->generatePasswordHash($password);
     }

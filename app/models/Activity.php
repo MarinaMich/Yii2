@@ -45,7 +45,6 @@ class Activity extends ActivityBase
 				$this->endDay=$this->endDay->format('Y-m-d');
 			}
 		}
-		
 		return parent::beforeValidate();
 	}
 
@@ -77,7 +76,7 @@ class Activity extends ActivityBase
         'is_blocked' => 'Блокирующее',
         'is_repeated' =>'Повторение события',
         'use_notification' =>'Получать уведомления на email',
-        'image' => 'Прикрепить файлы (максимальное кол-во 3 шт.)'
+        'images' => 'Прикрепить файлы (максимальное кол-во 3 шт.)'
     ];
 }
 }

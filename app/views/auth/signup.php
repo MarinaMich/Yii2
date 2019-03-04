@@ -18,6 +18,7 @@
         ]) ?>
         <?=$form->field($model,'email')?>
         <?=$form->field($model,'password')->passwordInput();?>
+        <!--сделать проверку правильности введения пароля--> 
 
         <div class="form-group">
             <button type="submit">Регистрация</button>

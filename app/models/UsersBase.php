@@ -33,9 +33,11 @@ class UsersBase extends \yii\db\ActiveRecord
     {
         return [
             [['email', 'password_hash'], 'required'],
+            //safe - означает, что поле безопасно и проверяться не будет
             [['date_create'], 'safe'],
             [['email', 'token', 'fio'], 'string', 'max' => 150],
             [['password_hash'], 'string', 'max' => 300],
+            //unique - поле уникальное
             [['email'], 'unique'],
         ];
     }
@@ -45,6 +47,7 @@ class UsersBase extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
+        //Yii::t - для мультиязычности
         return [
             'id' => Yii::t('app', 'ID'),
             'email' => Yii::t('app', 'Email'),
@@ -60,6 +63,7 @@ class UsersBase extends \yii\db\ActiveRecord
      */
     public function getActivities()
     {
+        //один ко многим между таблицами
         return $this->hasMany(Activity::className(), ['user_id' => 'id']);
     }
 }

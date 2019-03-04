@@ -17,7 +17,7 @@ class ActivityController extends BaseController
 		];
 
 	}
-
+//форма просмотра события
 	public function actionView($id){
         /** @var ActivityComponent $comp */
         $comp=\Yii::$app->activity;
@@ -27,7 +27,7 @@ class ActivityController extends BaseController
             throw new HttpException(401,'Activity not found');
         }
 
-	    if(!\Yii::$app->rbac->canViewEditAll()){
+	 if(!\Yii::$app->rbac->canViewEditAll()){
             if(!\Yii::$app->rbac->canViewActivity($acitivty)){
                 throw new HttpException(403,'not access view this activity');
             }

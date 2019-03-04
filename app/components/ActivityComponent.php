@@ -37,6 +37,7 @@ class ActivityComponent extends Component
      * @param $id
      * @return Activity|array|\yii\db\ActiveRecord|null
      */
+
 	public function getActivity($id){
 	    return $this->getModel()::find()->andWhere(['id'=>$id])->one();
     }
@@ -48,7 +49,7 @@ class ActivityComponent extends Component
 
             return true;
         }else{
-		    $model->images='';
+            $model->images='';
 		    return false;
         }
     }

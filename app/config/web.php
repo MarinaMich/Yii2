@@ -16,8 +16,10 @@ $config = [
     ],
     'components' => [
         'rbac'=>\app\components\RbacComponent::class,
-        'activity'=>['class'=>\app\components\ActivityComponent::class,
-            'activity_class' => \app\models\Activity::class],
+        'activity'=>[
+            'class'=>\app\components\ActivityComponent::class,
+            'activity_class' => \app\models\Activity::class
+        ],
         'auth'=>\app\components\UsersAuthComponent::class,
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -36,6 +38,7 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set

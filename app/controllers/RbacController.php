@@ -13,6 +13,7 @@ use yii\web\Controller;
 
 class RbacController extends Controller
 {
+	//формирует правило
     public function actionGen(){
         \Yii::$app->rbac->generateRbacRules();
     }
